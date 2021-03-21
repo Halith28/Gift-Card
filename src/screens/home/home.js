@@ -12,7 +12,7 @@ import MasterLogo from "./images/image8.png";
 import GiftCard1 from "./images/image11.png";
 import Logo from "./images/logo.svg";
 import icon1 from "./images/whatsapp.png";
-import icon2 from "./images/bookmark.png";
+import icon2 from "./images/bookmark.jpg";
 import icon3 from "./images/close.png";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 
@@ -20,7 +20,6 @@ const useStyles = makeStyles((theme) => ({
   root: {
     height: "100vh",
     background: "linear-gradient(180deg, black 225px, #fff 0, #fff 100%)",
-    // background: "linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
@@ -37,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: 20,
     // boxShadow: " 0px 9px 5px 0px rgba(132,120,120,0.75)",
     // boxShadow: "0 10px 10px -5px",
-    boxShadow: "0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23)",
+    boxShadow: "0 10px 20px rgb(0 0 0 / 0%), 0 6px 6px rgb(0 0 0 / 10%)",
   },
   textInput: {
     "& .MuiOutlinedInput-root": {
@@ -59,8 +58,10 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: 20,
     color: "white",
     backgroundColor: "#1aa5e7",
+    boxShadow: "0px 8px 15px #1aa5e747",
     "&:hover": {
       backgroundColor: "#1aa5e7",
+      boxShadow: "0px 10px 10px #a7daf1",
     },
     "& .MuiSvgIcon-root": {
       fontSize: "1.8rem",
@@ -90,7 +91,7 @@ const useStyles = makeStyles((theme) => ({
   typography: {
     alignSelf: "center",
     textAlign: "center",
-    fontWeight: 200,
+    fontWeight: 300,
     fontSize: 18,
   },
   typography1: {
@@ -168,7 +169,7 @@ const HomeComponent = () => {
           <span className={classes.headLine}>Congratulations</span>
           🥳
         </Typography>
-        <Paper elevation={2} className={classes.paperComp}>
+        <Paper className={classes.paperComp}>
           {/* <Typography variant={"h6"}>Gift Card</Typography> */}
           {/* <img src={Logo} alt="logo" className={classes.img} /> */}
           <img src={GiftCard1} alt="logo" className={classes.img} />

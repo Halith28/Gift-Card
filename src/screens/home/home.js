@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+
+// Required Tags are imported here
 import {
   Avatar,
   Button,
@@ -8,14 +10,17 @@ import {
   TextField,
   Typography,
 } from "@material-ui/core";
+
+// Required icons are imported here
 import MasterLogo from "./images/image8.png";
-import GiftCard1 from "./images/image11.png";
+import GiftCard from "./images/image11.png";
 import Logo from "./images/logo.svg";
 import icon1 from "./images/whatsapp.png";
 import icon2 from "./images/bookmark.jpg";
 import icon3 from "./images/close.png";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 
+// Styles for Entire page
 const useStyles = makeStyles((theme) => ({
   root: {
     height: "100vh",
@@ -29,13 +34,10 @@ const useStyles = makeStyles((theme) => ({
     width: "300px",
   },
   paperComp: {
-    // padding: "20px",
     height: "150px",
     width: "300px",
     borderRadius: "20px",
     marginBottom: 20,
-    // boxShadow: " 0px 9px 5px 0px rgba(132,120,120,0.75)",
-    // boxShadow: "0 10px 10px -5px",
     boxShadow: "0 10px 20px rgb(0 0 0 / 0%), 0 6px 6px rgb(0 0 0 / 10%)",
   },
   textInput: {
@@ -122,8 +124,12 @@ const useStyles = makeStyles((theme) => ({
   giftMessage: {
     marginBottom: 20,
   },
+  questionCard: {
+    marginBottom: 10,
+  },
 }));
 
+// the following Json has FAQ lists
 const data = [
   {
     title: "Where will I get the gift card?",
@@ -133,20 +139,25 @@ const data = [
   {
     title: "When will I recieve the Gift card?",
     icon: icon2,
-    body: "You will recieve it on Whatsapp/SMS on your mobile.",
+    body: "Within 48 hours, when your Man Matters order is delivered",
   },
   {
     title: "What if I cancel the order?",
     icon: icon3,
-    body: "You will recieve it on Whatsapp/SMS on your mobile.",
+    body: "The voucher will not delivered if you cancel the order",
   },
 ];
 
+// Note: This component render has two pages(bodies) with (if,else) condition.
+// it contains common header and footer for both pages as a Reusable Components.
+
+//Start HomeComponent
 const HomeComponent = () => {
   const classes = useStyles();
   const [buttonStatus, setButtonStatus] = useState(true);
   const [success, setSuccess] = useState(false);
 
+  // Start mobile number validation
   const handleChange = (e) => {
     const check =
       /^(\+91[\s]?)?[0]?(91)?[6789]\d{9}$/i.test(e.target.value) === false
@@ -154,28 +165,39 @@ const HomeComponent = () => {
         : false;
     setButtonStatus(check);
   };
+  // End mobile number validation
 
+  // Start Voucher Collection function by clicking Button
   const handleSuccess = () => {
     if (!buttonStatus) {
       setSuccess(true);
     }
   };
+  // End Voucher Collection function by clicking Button
 
   return (
+    // Start Parent Grid Component
     <Grid container className={classes.root}>
       <Grid item className={classes.grid}>
+        {/* Start Header Component */}
         <img src={MasterLogo} alt="logo" className={classes.logo} />
         <Typography variant="h5" className={classes.wishCard}>
           <span className={classes.headLine}>Congratulations</span>
           🥳
         </Typography>
         <Paper className={classes.paperComp}>
-          {/* <Typography variant={"h6"}>Gift Card</Typography> */}
-          {/* <img src={Logo} alt="logo" className={classes.img} /> */}
-          <img src={GiftCard1} alt="logo" className={classes.img} />
+          <img src={GiftCard} alt="logo" className={classes.img} />
         </Paper>
+        {/* End Header Component */}
+
+        {/* if success's state is false first page will be shown. After we type valid
+        indian mobile number, it will allows to get voucher coupon and redirect
+        to second page */}
+
+        {/* Start Body Component  */}
         {!success ? (
           <Grid>
+            {/*Start First page */}
             <Grid className={classes.giftMessage}>
               <Typography variant="h6" className={classes.typography}>
                 You have WON Paytm Gift
@@ -187,6 +209,8 @@ const HomeComponent = () => {
                 <b>on Man Matters</b>
               </Typography>
             </Grid>
+
+            {/* Start Input field to get Mobile number */}
             <TextField
               variant="outlined"
               fullWidth
@@ -198,11 +222,10 @@ const HomeComponent = () => {
                   Enter the same number used on Man Matters
                 </Typography>
               }
-
-              // inputProps={{
-              //   className: classes.textInput,
-              // }}
             />
+            {/* End Input field to get Mobile number */}
+
+            {/*Start Button to collect voucher*/}
             <Button
               variant="contained"
               fullWidth
@@ -213,11 +236,15 @@ const HomeComponent = () => {
               {"Wow! get my Paytm Gift card"}
               <ChevronRightIcon />
             </Button>
+            {/*End Button to collect voucher*/}
+
+            {/*End First Page */}
           </Grid>
         ) : (
           <Grid>
+            {/*Start Second page */}
             {data.map((val, index) => (
-              <div key={index} style={{ marginBottom: 10 }}>
+              <div key={index} className={classes.questionCard}>
                 <Typography
                   variant="subtitle1"
                   className={classes.titleTypography}
@@ -239,15 +266,23 @@ const HomeComponent = () => {
                 </Grid>
               </div>
             ))}
+            {/*End Second page */}
           </Grid>
         )}
+        {/*End Body Component */}
+
+        {/*Start Footer Component */}
         <div className={classes.footer}>
           <Typography variant="caption">{"Powered by"}</Typography>
           <img src={Logo} alt="logo" />
         </div>
+        {/*End Footer Component */}
       </Grid>
     </Grid>
+    // End Parent Grid Component
   );
 };
+
+//End HomeComponent
 
 export default HomeComponent;
